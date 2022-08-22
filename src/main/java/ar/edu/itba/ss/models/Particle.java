@@ -7,26 +7,39 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Getter
-@Setter
 public class Particle {
     private static int SEQUENCE = 1;
     public static final double RC = 1.0;
 
+    @Getter @Setter
     private int id;
-    private Point position;
+    @Getter @Setter
     private double radius;
+    @Getter @Setter
+    private Point position;
+    @Getter @Setter
+    private Velocity velocity;
+    @Getter
     private final Set<Particle> neighbours;
 
-    public Particle(double radius, Point position) {
+    public Particle(double radius, Point position, Velocity velocity) {
         this.id = SEQUENCE++;
         this.radius = radius;
         this.position = position;
+        this.velocity = velocity;
         this.neighbours = new HashSet<>();
     }
 
+    public Particle(int id, double radius, Point position, Velocity velocity, Set<Particle> neighbours) {
+        this.id = id;
+        this.radius = radius;
+        this.position = position;
+        this.velocity = velocity;
+        this.neighbours = neighbours;
+    }
+
     public Particle(double radius) {
-        this(radius, new Point(0, 0));
+        this(radius, new Point(0, 0), new Velocity(0, 0));
     }
 
     public void addNeighbour(Particle particle) {
@@ -50,10 +63,6 @@ public class Particle {
 
     public void setNeighbours(Set<Particle> candidates) {
         candidates.stream().filter(this::isNeighbour).forEach(this::addNeighbour);
-    }
-
-    public Set<Particle> getNeighbours() {
-        return this.neighbours;
     }
 
     @Override
