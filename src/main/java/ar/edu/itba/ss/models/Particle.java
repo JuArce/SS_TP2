@@ -1,5 +1,6 @@
 package ar.edu.itba.ss.models;
 
+import ar.edu.itba.ss.interfaces.Cloneable;
 import ar.edu.itba.ss.interfaces.Movable;
 import ar.edu.itba.ss.tools.Random;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Particle implements Movable {
+public class Particle implements Movable, Cloneable<Particle> {
     private static int SEQUENCE = 1;
     public static final double RC = 1.0;
     private static final int n = 1;
@@ -94,6 +95,19 @@ public class Particle implements Movable {
                 .collect(Collectors.averagingDouble(a -> a));
         double angle = Math.atan2(y, x) + noise;
         this.velocity.setAngle(angle);
+    }
+
+    @Override
+    public Particle clone() {
+        Particle p;
+        try {
+            p = (Particle) super.clone();
+        } catch (CloneNotSupportedException e) {
+            p = new Particle(this.getRadius(), this.getPosition(), this.getVelocity());
+        }
+        p.position = this.position.clone();
+        p.velocity = this.velocity.clone();
+        return p;
     }
 
     @Override

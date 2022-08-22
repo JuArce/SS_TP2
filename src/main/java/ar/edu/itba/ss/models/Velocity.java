@@ -1,11 +1,12 @@
 package ar.edu.itba.ss.models;
 
+import ar.edu.itba.ss.interfaces.Cloneable;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Velocity {
+public class Velocity implements Cloneable<Velocity> {
     private double speed;
     private double angle;
 
@@ -20,5 +21,16 @@ public class Velocity {
 
     public double getYSpeed() {
         return this.speed * Math.sin(this.angle);
+    }
+
+    @Override
+    public Velocity clone() {
+        Velocity v;
+        try {
+            v = (Velocity) super.clone();
+        } catch (CloneNotSupportedException e) {
+            v = new Velocity(this.getXSpeed(), this.getYSpeed());
+        }
+        return v;
     }
 }

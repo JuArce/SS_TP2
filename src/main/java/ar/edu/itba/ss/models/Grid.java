@@ -98,4 +98,10 @@ public class Grid {
         this.cells = new Cell[m][m];
         fillCells(particles);
     }
+
+    public Set<Particle> getParticlesClone() {
+        Set<Particle> particles = new HashSet<>();
+        this.particles.forEach(Particle::clone);
+        return particles;
+    }
 }
