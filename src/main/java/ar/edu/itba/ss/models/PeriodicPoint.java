@@ -23,4 +23,14 @@ public class PeriodicPoint extends Point {
 
         return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
     }
+
+    @Override
+    public void setX(double x) {
+        super.setX((x + side) % side);
+    }
+
+    @Override
+    public void setY(double y) {
+        super.setY((y + side) % side);
+    }
 }
