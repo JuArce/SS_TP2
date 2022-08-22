@@ -1,26 +1,34 @@
 package ar.edu.itba.ss.models;
 
+import ar.edu.itba.ss.interfaces.Movable;
+import ar.edu.itba.ss.tools.Random;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-public class Particle {
+public class Particle implements Movable {
     private static int SEQUENCE = 1;
     public static final double RC = 1.0;
+    private static final int n = 1;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private int id;
-    @Getter @Setter
+    @Getter
+    @Setter
     private double radius;
-    @Getter @Setter
+    @Getter
+    @Setter
     private Point position;
-    @Getter @Setter
+    @Getter
+    @Setter
     private Velocity velocity;
     @Getter
-    private final Set<Particle> neighbours;
+    private Set<Particle> neighbours;
 
     public Particle(double radius, Point position, Velocity velocity) {
         this.id = SEQUENCE++;
@@ -42,11 +50,9 @@ public class Particle {
         this(radius, new Point(0, 0), new Velocity(0, 0));
     }
 
-    public void addNeighbour(Particle particle) {
-        if (this.equals(particle)) {
-            return;
-        }
-        this.neighbours.add(particle);
+    public void setNeighbours(Set<Particle> candidates) {
+        this.neighbours = new HashSet<>();
+        candidates.stream().filter(this::isNeighbour).forEach(this::addNeighbour);
     }
 
     public boolean isNeighbour(Particle particle, double rc) {
@@ -57,12 +63,37 @@ public class Particle {
         return this.isNeighbour(particle, Particle.RC);
     }
 
+    public void addNeighbour(Particle particle) {
+        if (this.equals(particle)) {
+            return;
+        }
+        this.neighbours.add(particle);
+    }
+
     public double distanceTo(Particle particle) {
         return this.position.distanceTo(particle.position) - this.radius - particle.radius;
     }
 
-    public void setNeighbours(Set<Particle> candidates) {
-        candidates.stream().filter(this::isNeighbour).forEach(this::addNeighbour);
+    @Override
+    public void move(double dt) {
+        this.position.setX(this.position.getX() + this.velocity.getXSpeed() * dt);
+        this.position.setY(this.position.getY() + this.velocity.getYSpeed() * dt);
+    }
+
+    public void updateVelocity() {
+        final Set<Particle> particles = new HashSet<>(this.neighbours);
+        particles.add(this);
+        final double noise = Random.getRandom(-n / 2.0, n / 2.0);
+        double y = particles.stream()
+                .map(p -> p.getVelocity().getAngle())
+                .map(Math::sin)
+                .collect(Collectors.averagingDouble(a -> a));
+        double x = particles.stream()
+                .map(p -> p.getVelocity().getAngle())
+                .map(Math::cos)
+                .collect(Collectors.averagingDouble(a -> a));
+        double angle = Math.atan2(y, x) + noise;
+        this.velocity.setAngle(angle);
     }
 
     @Override

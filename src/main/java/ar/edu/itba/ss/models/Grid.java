@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Grid {
-    private final Cell[][] cells;
+    private Cell[][] cells;
     @Getter
     private final Set<Particle> particles;
     private final int m;
@@ -89,5 +89,13 @@ public class Grid {
                 }
             }
         });
+    }
+
+    public void update(double dt) {
+        this.calculateNeighbours();
+        particles.forEach(p -> p.move(dt));
+        particles.forEach(Particle::updateVelocity);
+        this.cells = new Cell[m][m];
+        fillCells(particles);
     }
 }

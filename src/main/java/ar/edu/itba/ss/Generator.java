@@ -8,7 +8,8 @@ import com.opencsv.CSVWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+
+import static ar.edu.itba.ss.tools.Random.getRandom;
 
 public class Generator {
     public static void main(String[] args) {
@@ -61,9 +62,5 @@ public class Generator {
         } catch (Exception e) {
             e.printStackTrace(); //TODO: handle exception
         }
-    }
-
-    public static double getRandom(double min, double max) {
-        return ThreadLocalRandom.current().nextDouble(min, max);
     }
 }
