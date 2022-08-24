@@ -1,5 +1,6 @@
 package ar.edu.itba.ss.tools;
 
+import ar.edu.itba.ss.interfaces.Exporter;
 import ar.edu.itba.ss.models.Particle;
 import com.opencsv.CSVWriter;
 

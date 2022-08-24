@@ -4,7 +4,7 @@ import ar.edu.itba.ss.models.Grid;
 import ar.edu.itba.ss.models.OffLattice;
 import ar.edu.itba.ss.models.Particle;
 import ar.edu.itba.ss.tools.CsvExporter;
-import ar.edu.itba.ss.tools.Exporter;
+import ar.edu.itba.ss.interfaces.Exporter;
 import ar.edu.itba.ss.tools.ParticleReader;
 
 import java.time.Duration;
