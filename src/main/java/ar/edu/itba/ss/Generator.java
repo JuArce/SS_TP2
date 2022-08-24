@@ -51,7 +51,12 @@ public class Generator {
             CSVWriter writer = new CSVWriter(new FileWriter(dynamicNFile), ' ', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
             writer.writeNext(new String[]{String.valueOf(0)});
             particles.forEach(p -> {
-                writer.writeNext(p.toString().split(" "));
+                List<String> line = new ArrayList<>();
+                line.add(String.valueOf(p.getPosition().getX()));
+                line.add(String.valueOf(p.getPosition().getY()));
+                line.add(String.valueOf(p.getVelocity().getSpeed()));
+                line.add(String.valueOf(p.getVelocity().getAngle()));
+                writer.writeNext(line.toArray(new String[0]));
             });
             writer.flush();
         } catch (Exception e) {
