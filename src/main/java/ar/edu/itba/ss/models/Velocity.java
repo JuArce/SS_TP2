@@ -10,6 +10,7 @@ public class Velocity implements Cloneable<Velocity> {
     private double speed;
     private double angle;
 
+    // Polar coordinates
     public Velocity(double speed, double angle) {
         this.speed = speed;
         this.angle = angle;
@@ -29,8 +30,16 @@ public class Velocity implements Cloneable<Velocity> {
         try {
             v = (Velocity) super.clone();
         } catch (CloneNotSupportedException e) {
-            v = new Velocity(this.getXSpeed(), this.getYSpeed());
+            v = new Velocity(this.speed, this.angle);
         }
         return v;
+    }
+
+    @Override
+    public String toString() {
+        return "Velocity{" +
+                "speed=" + speed +
+                ", angle=" + angle +
+                '}';
     }
 }

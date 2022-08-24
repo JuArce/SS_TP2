@@ -103,7 +103,7 @@ public class Particle implements Movable, Cloneable<Particle> {
         try {
             p = (Particle) super.clone();
         } catch (CloneNotSupportedException e) {
-            p = new Particle(this.getRadius(), this.getPosition(), this.getVelocity());
+            p = new Particle(this.getId(), this.getRadius(), this.getPosition(), this.getVelocity(), new HashSet<>(this.getNeighbours()));
         }
         p.position = this.position.clone();
         p.velocity = this.velocity.clone();
@@ -112,12 +112,7 @@ public class Particle implements Movable, Cloneable<Particle> {
 
     @Override
     public String toString() {
-        return "Particle{" +
-                "id=" + id +
-                ", position=" + position +
-                ", radius=" + radius +
-                ", neighbours=" + neighbours.stream().map(Particle::getId).toList() +
-                '}';
+        return String.format("%s %s %s %s %s", this.id, this.position.getX(), this.position.getY(), this.velocity.getSpeed(), this.velocity.getAngle());
     }
 
     @Override

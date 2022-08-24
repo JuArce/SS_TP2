@@ -101,7 +101,7 @@ public class Grid {
 
     public Set<Particle> getParticlesClone() {
         Set<Particle> particles = new HashSet<>();
-        this.particles.forEach(Particle::clone);
+        this.particles.forEach(p-> particles.add(p.clone()));
         return particles;
     }
 }
