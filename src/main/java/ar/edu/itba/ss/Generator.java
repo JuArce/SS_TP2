@@ -12,6 +12,7 @@ import java.util.List;
 import static ar.edu.itba.ss.tools.Random.getRandom;
 
 public class Generator {
+
     public static void main(String[] args) {
         final int L = 100;
         final int N = 1000;
@@ -34,7 +35,7 @@ public class Generator {
         }
 
         try {
-            CSVWriter writer = new CSVWriter(new FileWriter(staticNFile), ' ', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+            CSVWriter writer = new CSVWriter(new FileWriter(staticNFile), CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
             writer.writeNext(new String[]{String.valueOf(particles.size())});
             writer.writeNext(new String[]{String.valueOf(L)});
             particles.forEach(p -> {
@@ -42,13 +43,13 @@ public class Generator {
                 line.add(String.valueOf(r));
                 writer.writeNext(line.toArray(new String[0]));
             });
-            writer.flush();
+            writer.close();
         } catch (Exception e) {
             e.printStackTrace(); //TODO: handle exception
         }
 
         try {
-            CSVWriter writer = new CSVWriter(new FileWriter(dynamicNFile), ' ', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+            CSVWriter writer = new CSVWriter(new FileWriter(dynamicNFile), CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
             writer.writeNext(new String[]{String.valueOf(0)});
             particles.forEach(p -> {
                 List<String> line = new ArrayList<>();
@@ -58,7 +59,7 @@ public class Generator {
                 line.add(String.valueOf(p.getVelocity().getAngle()));
                 writer.writeNext(line.toArray(new String[0]));
             });
-            writer.flush();
+            writer.close();
         } catch (Exception e) {
             e.printStackTrace(); //TODO: handle exception
         }
