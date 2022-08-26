@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class Particle implements Movable, Cloneable<Particle> {
     private static int SEQUENCE = 1;
     public static final double RC = 1.0;
-    private static final int n = 1;
+    public static int n = 1;
 
     @Getter
     @Setter

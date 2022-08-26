@@ -7,6 +7,7 @@ import ar.edu.itba.ss.tools.CsvExporter;
 import ar.edu.itba.ss.interfaces.Exporter;
 import ar.edu.itba.ss.tools.ParticleReader;
 
+import java.lang.reflect.Field;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -18,12 +19,12 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
         final double dt = 100;
-        final int iterations = 100;
+        final int iterations = 10;
 
         String particlePath = args[0];
         String positionPath = args[1];
         boolean isPeriodic = true;
-        String outputFilename = args.length < 4 ? "output.csv" : args[3];
+        String outputFilename = args.length < 3 ? "output.csv" : args[2];
 
         Instant start = Instant.now();
 
