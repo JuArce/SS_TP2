@@ -43,7 +43,7 @@ public class ParticleReader {
         }
 
         lines.forEach(l -> {
-            String[] s = l.replaceAll("\\s+", " ").trim().split(" ");
+            String[] s = l.trim().split(",");
             particles.add(new Particle(Double.parseDouble(s[0])));
         });
         return sideLength;
@@ -57,7 +57,7 @@ public class ParticleReader {
         lines.remove(0);//First elements is the frame number
 
         lines.forEach(l -> {
-            String[] s = l.replaceAll("\\s+", " ").trim().split(" ");
+            String[] s = l.trim().split(",");
             if (particleIterator.hasNext()) {
                 Particle p = particleIterator.next();
                 Point point = isPeriodic ? new PeriodicPoint(Double.parseDouble(s[0]), Double.parseDouble(s[1]), sideLength)
