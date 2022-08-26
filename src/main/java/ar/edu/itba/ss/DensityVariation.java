@@ -1,6 +1,4 @@
-package ar.edu.itba.ss.tools;
-
-import ar.edu.itba.ss.App;
+package ar.edu.itba.ss;
 
 import java.util.List;
 
