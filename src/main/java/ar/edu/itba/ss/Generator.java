@@ -14,17 +14,17 @@ import static ar.edu.itba.ss.tools.Random.getRandom;
 public class Generator {
 
     public static void main(String[] args) {
-        final int L = 100;
-        final int N = 1000;
-        final double r = 1.0;
+        final int N = Integer.parseInt(args[0]);
+        final int L = Integer.parseInt(args[1]);
+        final double r = 0.5;
         final double minRandomPosition = 0 + r;
         final double maxRandomPosition = L - r;
-        final double speed = 0.3;
+        final double speed = 0.03;
         final double minRandomAngle = 0;
         final double maxRandomAngle = 2 * Math.PI;
 
-        final String staticNFile = "src/main/resources/input/staticN.txt";
-        final String dynamicNFile = "src/main/resources/input/dynamicN.txt";
+        final String staticNFile = "src/main/resources/input/" + args[2];
+        final String dynamicNFile = "src/main/resources/input/" + args[3];
 
         final List<Particle> particles = new ArrayList<>();
         for (int i = 0; i < N; i++) {
