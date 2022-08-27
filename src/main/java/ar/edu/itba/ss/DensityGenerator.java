@@ -1,5 +1,7 @@
 package ar.edu.itba.ss;
 
+import ar.edu.itba.ss.models.Particle;
+
 import java.util.List;
 
 public class DensityGenerator {
@@ -14,6 +16,7 @@ public class DensityGenerator {
             String staticFilename = staticPrefix + n + extension;
             String dynamicFilename = dynamicPrefix + n + extension;
             Generator.main(new String[]{String.valueOf(n), String.valueOf(L), staticFilename, dynamicFilename});
+            Particle.sequence = 1;
         }
     }
 }

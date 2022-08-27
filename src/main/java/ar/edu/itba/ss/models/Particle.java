@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Particle implements Movable, Cloneable<Particle> {
-    private static int SEQUENCE = 1;
+    public static int sequence = 1;
     public static final double RC = 1.0;
     public static int n = 1;
 
@@ -32,7 +32,7 @@ public class Particle implements Movable, Cloneable<Particle> {
     private Set<Particle> neighbours;
 
     public Particle(double radius, Point position, Velocity velocity) {
-        this.id = SEQUENCE++;
+        this.id = sequence++;
         this.radius = radius;
         this.position = position;
         this.velocity = velocity;

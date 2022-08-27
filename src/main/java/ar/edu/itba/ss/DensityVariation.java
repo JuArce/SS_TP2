@@ -1,5 +1,7 @@
 package ar.edu.itba.ss;
 
+import ar.edu.itba.ss.models.Particle;
+
 import java.util.List;
 
 public class DensityVariation {
@@ -11,6 +13,7 @@ public class DensityVariation {
             String dynamicFilename = "src/main/resources/input/density/dynamic_" + n + ".csv";
             String outputFilename = "density/output_" + n + ".csv";
             App.main(new String[]{staticFilename, dynamicFilename, outputFilename});
+            Particle.sequence = 1;
         }
     }
 }
