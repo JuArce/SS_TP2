@@ -6,7 +6,7 @@ import java.util.List;
 
 public class DensityVariation {
     public static void main(String[] args) {
-        final List<Integer> N = List.of(40, 100, 200, 300, 400, 500, 1000, 2000, 3000, 4000);
+        final List<Integer> N = List.of(10, 25, 50, 100, 250, 500, 1000, 1500);
 
         for(int n : N) {
             String staticFilename = "src/main/resources/input/density/static_" + n + ".csv";

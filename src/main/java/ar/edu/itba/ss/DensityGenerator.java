@@ -6,8 +6,8 @@ import java.util.List;
 
 public class DensityGenerator {
     public static void main(String[] args) {
-        final List<Integer> N = List.of(40, 100, 200, 300, 400, 500, 1000, 2000, 3000, 4000);
-        final int L = 20;
+        final List<Integer> N = List.of(10, 25, 50, 100, 250, 500, 1000, 1500);
+        final int L = 10;
         final String staticPrefix = "density/static_";
         final String dynamicPrefix = "density/dynamic_";
         final String extension = ".csv";
