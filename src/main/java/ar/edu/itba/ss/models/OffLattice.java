@@ -28,7 +28,9 @@ public class OffLattice {
         for (int i = 0; i < this.iterations; i++) {
             this.memento.add(this.grid.getParticlesClone());
             this.grid.update(dt);
-            System.out.println("Iteration " + i);
+            if (i % 100 == 0) {
+                System.out.println("Iteration: " + i);
+            }
         }
     }
 
