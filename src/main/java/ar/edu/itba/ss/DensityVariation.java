@@ -13,8 +13,8 @@ public class DensityVariation {
         final String extension = ".csv";
 
         N.forEach(particles -> noise.forEach(n -> {
-            String staticFilename = String.format(Locale.ROOT ,"src/main/resources/input/density/static_N_%d_L_%d_n_%f%s", particles, L, n, extension);
-            String dynamicFilename = String.format(Locale.ROOT ,"src/main/resources/input/density/dynamic_N_%d_L_%d_n_%f%s", particles, L, n, extension);
+            String staticFilename = String.format(Locale.ROOT ,"src/main/resources/input/density/static_N_%d_L_%d_n_%.1f%s", particles, L, n, extension);
+            String dynamicFilename = String.format(Locale.ROOT ,"src/main/resources/input/density/dynamic_N_%d_L_%d_n_%.1f%s", particles, L, n, extension);
             String outputFilename = String.format(Locale.ROOT ,"density/output_N_%d_L_%d_n_%.1f.csv", particles, L, n);
             Particle.n = n;
             App.main(new String[]{staticFilename, dynamicFilename, outputFilename});
