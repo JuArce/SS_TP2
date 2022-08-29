@@ -19,7 +19,7 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
         final double dt = 1;
-        final int iterations = 1000;
+        final int iterations = 2000;
 
         String particlePath = args[0];
         String positionPath = args[1];
