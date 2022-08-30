@@ -38,9 +38,12 @@ public class App {
         offLattice.simulate();
 
         Instant end = Instant.now();
-        System.out.println(Duration.between(start, end));
+        System.out.println("Simulation: " + Duration.between(start, end));
 
-         Exporter exporter = new CsvExporter();
-         exporter.export(outputFilename, offLattice.getMemento());
+        start = Instant.now();
+        Exporter exporter = new CsvExporter();
+        exporter.export(outputFilename, offLattice.getMemento());
+        end = Instant.now();
+        System.out.println("Export to CSV: " + Duration.between(start, end));
     }
 }
