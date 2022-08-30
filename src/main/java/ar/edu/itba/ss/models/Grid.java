@@ -55,7 +55,7 @@ public class Grid {
     }
 
     private void calculateNeighboursSimple() {
-        this.particles.forEach(p -> {
+        this.particles.stream().parallel().forEach(p -> {
             int x = this.getXIndex(p);
             int y = this.getYIndex(p);
 
@@ -74,7 +74,7 @@ public class Grid {
     }
 
     private void calculateNeighboursPeriodic() {
-        this.particles.forEach(p -> {
+        this.particles.stream().parallel().forEach(p -> {
             int x = this.getXIndex(p);
             int y = this.getYIndex(p);
 
@@ -93,9 +93,9 @@ public class Grid {
 
     public void update(double dt) {
         this.calculateNeighbours();
-        particles.forEach(p -> p.move(dt));
-        particles.forEach(Particle::calculateVelocity);
-        particles.forEach(Particle::updateVelocity);
+        particles.stream().parallel().forEach(p -> p.move(dt));
+        particles.stream().parallel().forEach(Particle::calculateVelocity);
+        particles.stream().parallel().forEach(Particle::updateVelocity);
         this.cells = new Cell[m][m];
         fillCells(particles);
     }
