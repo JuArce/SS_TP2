@@ -28,6 +28,8 @@ public class Particle implements Movable, Cloneable<Particle> {
     @Getter
     @Setter
     private Velocity velocity;
+    @Setter
+    private Velocity nextVelocity;
     @Getter
     private Set<Particle> neighbours;
 
@@ -81,7 +83,7 @@ public class Particle implements Movable, Cloneable<Particle> {
         this.position.setY(this.position.getY() + this.velocity.getYSpeed() * dt);
     }
 
-    public void updateVelocity() {
+    public void calculateVelocity() {
         final Set<Particle> particles = new HashSet<>(this.neighbours);
         particles.add(this);
         final double noise = Random.getRandom(-n / 2.0, n / 2.0);
@@ -94,7 +96,11 @@ public class Particle implements Movable, Cloneable<Particle> {
                 .map(Math::cos)
                 .collect(Collectors.averagingDouble(a -> a));
         double angle = Math.atan2(y, x) + noise;
-        this.velocity.setAngle(angle);
+        this.nextVelocity = new Velocity(this.velocity.getSpeed(), angle);
+    }
+
+    public void updateVelocity() {
+        this.velocity = this.nextVelocity;
     }
 
     @Override

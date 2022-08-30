@@ -94,6 +94,7 @@ public class Grid {
     public void update(double dt) {
         this.calculateNeighbours();
         particles.forEach(p -> p.move(dt));
+        particles.forEach(Particle::calculateVelocity);
         particles.forEach(Particle::updateVelocity);
         this.cells = new Cell[m][m];
         fillCells(particles);
