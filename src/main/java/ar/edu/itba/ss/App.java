@@ -7,6 +7,7 @@ import ar.edu.itba.ss.tools.CsvExporter;
 import ar.edu.itba.ss.interfaces.Exporter;
 import ar.edu.itba.ss.tools.ParticleReader;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.time.Duration;
 import java.time.Instant;
@@ -17,7 +18,7 @@ import java.util.List;
  * Run the simulation.
  */
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         final double dt = 1;
         final int iterations = 2000;
 
@@ -34,16 +35,15 @@ public class App {
 
         Grid grid = new Grid(l, particles, isPeriodic);
 
-        OffLattice offLattice = new OffLattice(dt, iterations, grid);
+        Exporter exporter = new CsvExporter(outputFilename);
+        exporter.open();
+
+        OffLattice offLattice = new OffLattice(dt, iterations, grid, exporter);
         offLattice.simulate();
+
+        exporter.close();
 
         Instant end = Instant.now();
         System.out.println("Simulation: " + Duration.between(start, end));
-
-        start = Instant.now();
-        Exporter exporter = new CsvExporter();
-        exporter.export(outputFilename, offLattice.getMemento());
-        end = Instant.now();
-        System.out.println("Export to CSV: " + Duration.between(start, end));
     }
 }

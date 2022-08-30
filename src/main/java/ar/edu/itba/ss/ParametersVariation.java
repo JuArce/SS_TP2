@@ -17,7 +17,11 @@ public class ParametersVariation {
             String dynamicFilename = String.format(Locale.ROOT ,"src/main/resources/input/parameters/dynamic_N_%d_L_%d_n_%.1f%s", particles, L, n, extension);
             String outputFilename = String.format(Locale.ROOT ,"parameters/output_N_%d_L_%d_n_%.1f.csv", particles, L, n);
             Particle.n = n;
-            App.main(new String[]{staticFilename, dynamicFilename, outputFilename});
+            try {
+                App.main(new String[]{staticFilename, dynamicFilename, outputFilename});
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             Particle.sequence = 1;
         }));
     }
