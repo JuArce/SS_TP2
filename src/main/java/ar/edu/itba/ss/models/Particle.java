@@ -98,16 +98,9 @@ public class Particle implements Movable, Cloneable<Particle> {
     }
 
     @Override
+    @SuppressWarnings("all")
     public Particle clone() {
-        Particle p;
-        try {
-            p = (Particle) super.clone();
-        } catch (CloneNotSupportedException e) {
-            p = new Particle(this.getId(), this.getRadius(), this.getPosition(), this.getVelocity(), new HashSet<>(this.getNeighbours()));
-        }
-        p.position = this.position.clone();
-        p.velocity = this.velocity.clone();
-        return p;
+        return new Particle(this.getId(), this.getRadius(), this.getPosition().clone(), this.getVelocity().clone(), new HashSet<>(this.getNeighbours()));
     }
 
     @Override

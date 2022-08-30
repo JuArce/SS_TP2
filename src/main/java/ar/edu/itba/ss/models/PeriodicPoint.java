@@ -25,6 +25,12 @@ public class PeriodicPoint extends Point {
     }
 
     @Override
+    @SuppressWarnings("all")
+    public Point clone() {
+        return new PeriodicPoint(this.getX(), this.getY(), this.getSide());
+    }
+
+    @Override
     public void setX(double x) {
         super.setX((x + side) % side);
     }

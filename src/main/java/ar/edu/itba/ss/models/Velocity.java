@@ -25,14 +25,9 @@ public class Velocity implements Cloneable<Velocity> {
     }
 
     @Override
+    @SuppressWarnings("all")
     public Velocity clone() {
-        Velocity v;
-        try {
-            v = (Velocity) super.clone();
-        } catch (CloneNotSupportedException e) {
-            v = new Velocity(this.speed, this.angle);
-        }
-        return v;
+        return new Velocity(this.speed, this.angle);
     }
 
     @Override
