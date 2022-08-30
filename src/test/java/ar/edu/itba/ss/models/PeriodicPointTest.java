@@ -3,7 +3,6 @@ package ar.edu.itba.ss.models;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
 
 public class PeriodicPointTest {
 
@@ -21,16 +20,6 @@ public class PeriodicPointTest {
         final PeriodicPoint p1 = new PeriodicPoint(1, 1, 10);
         final PeriodicPoint p2 = new PeriodicPoint(9, 9, 10);
         assertEquals(2.8284, p1.distanceTo(p2), DELTA);
-    }
-
-    @Test
-    public void cloneTest() {
-        final PeriodicPoint p1 = new PeriodicPoint(1, 1, 10);
-        final PeriodicPoint p2 = (PeriodicPoint) p1.clone();
-        assertNotSame(p1, p2);
-        assertEquals(p1.getX(), p2.getX(), DELTA);
-        assertEquals(p1.getY(), p2.getY(), DELTA);
-        assertEquals(p1.getSide(), p2.getSide(), DELTA);
     }
 
     @Test

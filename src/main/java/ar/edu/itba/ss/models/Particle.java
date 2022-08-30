@@ -1,6 +1,5 @@
 package ar.edu.itba.ss.models;
 
-import ar.edu.itba.ss.interfaces.Cloneable;
 import ar.edu.itba.ss.interfaces.Movable;
 import ar.edu.itba.ss.tools.Random;
 import lombok.Getter;
@@ -11,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Particle implements Movable, Cloneable<Particle> {
+public class Particle implements Movable {
     public static int sequence = 1;
     public static final double RC = 1.0;
     public static double n = 0.1;
@@ -102,12 +101,6 @@ public class Particle implements Movable, Cloneable<Particle> {
 
     public void updateVelocity() {
         this.velocity = this.nextVelocity;
-    }
-
-    @Override
-    @SuppressWarnings("all")
-    public Particle clone() {
-        return new Particle(this.getId(), this.getRadius(), this.getPosition().clone(), this.getVelocity().clone(), new HashSet<>(this.getNeighbours()));
     }
 
     @Override

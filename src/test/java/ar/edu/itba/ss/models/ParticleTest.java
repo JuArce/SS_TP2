@@ -34,17 +34,4 @@ public class ParticleTest {
         assertEquals(1.7071, p.getPosition().getX(), 0.0001);
         assertEquals(1.7071, p.getPosition().getY(), 0.0001);
     }
-
-    @Test
-    public void cloneTest() {
-        final Particle p1 = new Particle(0.5, new Point(1, 1), new Velocity(1, Math.PI / 4));
-        final Particle p2 = p1.clone();
-        assertNotSame(p1, p2);
-        assertEquals(p1.getId(), p2.getId());
-        assertEquals(p1.getRadius(), p2.getRadius(), 0.0001);
-        assertEquals(p1.getPosition().getX(), p2.getPosition().getX(), 0.0001);
-        assertEquals(p1.getPosition().getY(), p2.getPosition().getY(), 0.0001);
-        assertEquals(p1.getVelocity().getSpeed(), p2.getVelocity().getSpeed(), 0.0001);
-        assertEquals(p1.getVelocity().getAngle(), p2.getVelocity().getAngle(), 0.0001);
-    }
 }

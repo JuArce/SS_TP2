@@ -1,12 +1,11 @@
 package ar.edu.itba.ss.models;
 
-import ar.edu.itba.ss.interfaces.Cloneable;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Point implements Cloneable<Point> {
+public class Point {
     protected double x;
     protected double y;
 
@@ -20,12 +19,6 @@ public class Point implements Cloneable<Point> {
         final double deltaY = this.y - point.y;
 
         return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-    }
-
-    @Override
-    @SuppressWarnings("all")
-    public Point clone() {
-        return new Point(this.getX(), this.getY());
     }
 
     @Override
