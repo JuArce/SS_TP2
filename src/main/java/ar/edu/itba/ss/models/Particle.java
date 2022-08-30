@@ -59,7 +59,8 @@ public class Particle implements Movable, Cloneable<Particle> {
     }
 
     public boolean isNeighbour(Particle particle, double rc) {
-        return !this.equals(particle) && this.distanceTo(particle) <= rc;
+        double distance = this.distanceTo(particle);
+        return !this.equals(particle) && (distance < rc || Math.abs(distance - rc) < 0.00000001);
     }
 
     public boolean isNeighbour(Particle particle) {
