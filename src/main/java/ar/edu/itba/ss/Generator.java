@@ -16,7 +16,7 @@ public class Generator {
     public static void main(String[] args) {
         final int N = Integer.parseInt(args[0]);
         final int L = Integer.parseInt(args[1]);
-        final double r = 0.5;
+        final double r = 0;
         final double minRandomPosition = 0 + r;
         final double maxRandomPosition = L - r;
         final double speed = 0.03;
