@@ -78,6 +78,7 @@ public class Grid {
             int x = this.getXIndex(p);
             int y = this.getYIndex(p);
 
+            Set<Particle> candidates = new HashSet<>();
             for (int i = x - 1; i <= x + 1; i++) {
                 for (int j = y - 1; j <= y + 1; j++) {
                     int mI = (i + m) % m;
@@ -85,9 +86,10 @@ public class Grid {
                     if (cells[mI][mJ] == null) {
                         continue;
                     }
-                    p.setNeighbours(cells[mI][mJ].getParticles());
+                    candidates.addAll(cells[mI][mJ].getParticles());
                 }
             }
+            p.setNeighbours(candidates);
         });
     }
 
