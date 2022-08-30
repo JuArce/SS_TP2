@@ -9,7 +9,7 @@ import java.util.Set;
 public interface Exporter {
 
     void open() throws IOException;
-    
+
     void export(int i, Set<Particle> particles);
 
     void close();

@@ -2,6 +2,7 @@ package ar.edu.itba.ss;
 
 import ar.edu.itba.ss.models.Particle;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
