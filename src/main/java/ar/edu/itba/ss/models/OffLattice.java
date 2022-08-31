@@ -4,10 +4,6 @@ import ar.edu.itba.ss.interfaces.Exporter;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 
 @Getter
 @Setter
@@ -16,8 +12,6 @@ public class OffLattice {
     private int iterations;
     private Grid grid;
     private final Exporter exporter;
-    @Getter
-    private final List<Set<Particle>> memento = new ArrayList<>();
 
     public OffLattice(double dt, int iterations, Grid grid, Exporter exporter) {
         this.dt = dt;
