@@ -1,0 +1,156 @@
+@startuml
+class App{
++ {static} void **main**(String[] args)
+}
+
+
+interface Movable {
+void **move**(double dt)
+}
+
+
+class Particle implements Movable {
+- {static} int SEQUENCE = 1
++ {static} double RC = 1.0
++ {static} double n = 0.1
+- int id
+- double radius
+- Point position
+- Velocity velocity
+- Velocity nextVelocity
+- Set<Particle> neighbours
+
++ **Particle**(double radius, Point position, Velocity velocity)
++ **Particle**(int id, double radius, Point position, Velocity velocity, Set<Particle> neighbours)
++ **Particle**(double radius)
++ void **setNeighbours**(Set<Particle> candidates)
++ boolean **isNeighbour**(Particle p, double rc)
++ boolean **isNeighbour**(Particle p)
++ void **addNeighbour**(Particle p)
++ double **distanceTo**(Particle p)
++ void **move**(double dt)
++ void **calculateVelocity**()
++ void **updateVelocity**()
++ String **toString**()
++ boolean **equals**(Particle p)
++ int **hashCode**()
++ getters() & setters()
+}
+
+
+Particle *-- Point
+Particle *-- PeriodicPoint
+Particle *-- Velocity
+
+
+class Point {
+# double x
+# double y
+
++ **Point**(double x, double y)
++ double **distanceTo**(Point p)
++ String **toString**()
++ getters() & setters()
+}
+
+
+class PeriodicPoint extends Point {
+- int side
+
++ **PeriodicPoint**(double x, double y, double side)
++ double **distanceTo**(Point point)
++ getters() & setters()
+}
+
+
+class Velocity {
+- double speed
+- double angle
+
++ **Velocity**(double speed, double angle)
++ **getXSpeed**()
++ **getYSpeed**()
++ String **toString**()
++ getters() & setters()
+}
+
+
+class OffLattice {
+- double dt
+- int iterations
+- Grid grid
+- Exporter exporter
+
++ **OffLattice**(double dt, int iterations, Grid grid, Exporter exporter)
++ void **simulate**()
+}
+
+
+class Grid {
+- Cell[][] cells
+- Set<Particle> particles
+- int m
+- int l
+- boolean isPeriodic
+
++ **Grid**(int sideLength, List<Particle> particles, boolean isPeriodic)
+- void **fillCells**(Set<Particle> particles)
+- int **getXIndex**(Particle particle)
+- int **getYIndex**(Particle particle)
++ void **calculateNeighbours**()
+- void **calculateNeighboursSimple**()
+- void **calculateNeighboursPeriodic**()
++ void **update**(double)
++ Set<Particle> **getParticles**()
+}
+
+
+class Cell {
+- Set<Particles> particles
+
++ **Cell**()
++ void **addParticle**(Particle p)
++ getters() & setters()
+}
+
+
+OffLattice *-- Grid
+OffLattice *-- Exporter
+Grid *-- Cell
+Grid *-- Particle
+Cell *-- Particle
+
+
+class ParticleReader {
+- File particlePath
+- File positionPath
+
++ **ParticleReader**(String particlePath, String positionPath)
++ int **read**(List<Particle> particles, boolean isPeriodic)
+- int **readParticles**(List<Particle> particles)
+- void **readPositions**(List<Particle> particles, int sideLength, boolean isPeriodic)
+- List<String> **getLines**(File file)
+}
+
+
+
+interface Exporter {
+void **open**()
+void **export**(Grid grid)
+void **close**()
+}
+
+
+class CsvExporter implements Exporter {
+- {static} String baseFilename
+- String filename
+- CSVWritter csvWritterAppender
+
++ **CsvExporter**(String filename)
++ void **open**()
++ void **export**(int i, Set<Particles>)
++ void **close**()
+}
+
+
+@enduml
